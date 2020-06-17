@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="(Headless) ProjectorLauncher" type="JetRunConfigurationType">
+  <configuration default="false" name="(Headless) ProjectorLauncher (Local)" type="JetRunConfigurationType">
     <module name="projector-demo.main" />
     <option name="VM_PARAMETERS" value="-Dorg.jetbrains.projector.server.classToLaunch=org.jetbrains.projector.demo.OriginalMain" />
     <option name="PROGRAM_PARAMETERS" value="" />

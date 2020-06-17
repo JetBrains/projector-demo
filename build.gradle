@@ -23,6 +23,7 @@ plugins {
 
 repositories {
   mavenCentral()
+  maven { setUrl("https://jitpack.io") }
 }
 
 mainClassName = "org.jetbrains.projector.demo.OriginalMain"
@@ -42,10 +43,15 @@ compileKotlin {
   }
 }
 
+configurations.all {
+  // disable caching of -SNAPSHOT dependencies
+  resolutionStrategy.cacheChangingModulesFor(0, "seconds")
+}
+
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
   implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-  implementation "org.jetbrains:projector-server"
+  implementation "com.github.JetBrains.projector-server:projector-server:$projectorServerVersion"
 
   jarOriginal "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
   jarOriginal "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"

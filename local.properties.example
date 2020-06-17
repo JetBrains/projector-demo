@@ -1,0 +1,2 @@
+# If you want to use local projector-server:projector-server module, define the following property:
+useLocalProjectorServer=true

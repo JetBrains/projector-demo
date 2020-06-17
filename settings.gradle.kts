@@ -26,4 +26,19 @@ pluginManagement {
 
 rootProject.name = "projector-demo"
 
-includeBuild("../projector-server")
+val localProperties = java.util.Properties().apply {
+  try {
+    load(File(rootDir, "local.properties").inputStream())
+  }
+  catch (t: Throwable) {
+    println("Can't read local.properties: $t, assuming empty")
+  }
+}
+
+if (localProperties["useLocalProjectorServer"] == "true") {
+  includeBuild("../projector-server") {
+    dependencySubstitution {
+      substitute(module("com.github.JetBrains.projector-server:projector-server")).with(project(":projector-server"))
+    }
+  }
+}
