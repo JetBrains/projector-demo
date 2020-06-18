@@ -62,6 +62,7 @@ class MainPanel : JPanel() {
       panel.add(petList)
       panel.add(JLabel("嗨"))
       panel.add(JTextField(20))
+      panel.add(DialogsCreator())
 
       return panel
     }
