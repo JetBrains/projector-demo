@@ -19,6 +19,7 @@
 package org.jetbrains.projector.demo
 
 import org.jetbrains.projector.demo.ui.createFrame
+import org.jetbrains.projector.server.ProjectorLauncher
 import org.jetbrains.projector.server.ProjectorServer
 import javax.swing.UIManager
 
@@ -32,13 +33,8 @@ object HeadlessSupportingMain {
     // You can use this way or your own one.
 
     if (ProjectorServer.isEnabled) {
-      val server = ProjectorServer.startServer()
-
-      Runtime.getRuntime().addShutdownHook(object : Thread() {
-        override fun run() {
-          server.stop()
-        }
-      })
+      val success = ProjectorLauncher.runProjectorServer()
+      check(success)
     }
 
     // Perform AWT operations such as creating a frame only after launching the HeadlessServer.
@@ -46,6 +42,8 @@ object HeadlessSupportingMain {
 
     UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName())
 
-    createFrame().apply { isVisible = true }
+    createFrame().apply {
+      isVisible = true
+    }
   }
 }
