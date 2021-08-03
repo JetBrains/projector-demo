@@ -66,6 +66,8 @@ task jarOriginal(type: Jar) {
       )
   }
 
+  exclude("META-INF/versions/9/module-info.class")
+
   baseName = project.name + '-original'
 
   from {
@@ -81,6 +83,8 @@ task jarHeadlessSupport(type: Jar) {
       "Main-Class": "org.jetbrains.projector.demo.HeadlessSupportingMain",
       )
   }
+
+  exclude("META-INF/versions/9/module-info.class")
 
   baseName = project.name + '-headless-support'
 
