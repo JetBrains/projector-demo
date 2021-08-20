@@ -23,7 +23,7 @@ plugins {
 
 repositories {
   mavenCentral()
-  maven { setUrl("https://jitpack.io") }
+  maven { setUrl("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies")}
 }
 
 mainClassName = "org.jetbrains.projector.demo.OriginalMain"
@@ -51,7 +51,7 @@ configurations.all {
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
   implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-  implementation "com.github.JetBrains.projector-server:projector-server:$projectorServerVersion"
+  implementation "org.jetbrains.projector:projector-server:$projectorServerVersion"
 
   jarOriginal "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
   jarOriginal "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
