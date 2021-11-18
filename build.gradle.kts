@@ -96,3 +96,7 @@ val jarHeadlessSupport by tasks.creating(Jar::class) {
 
   with(tasks.jar.get())
 }
+
+tasks.build {
+  dependsOn(jarOriginal, jarHeadlessSupport)
+}
