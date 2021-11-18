@@ -1,15 +1,21 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="(UI) HeadlessSupportingMain" type="JetRunConfigurationType">
-    <module name="projector-demo.main" />
-    <option name="VM_PARAMETERS" value="" />
-    <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" />
-    <option name="PASS_PARENT_ENVS" value="true" />
-    <option name="MAIN_CLASS_NAME" value="org.jetbrains.projector.demo.HeadlessSupportingMain" />
-    <option name="WORKING_DIRECTORY" value="" />
-    <method v="2">
-      <option name="Make" enabled="true" />
-    </method>
+  <configuration default="false" name="(UI) HeadlessSupportingMain" type="GradleRunConfiguration" factoryName="Gradle">
+    <ExternalSystemSettings>
+      <option name="executionName" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$" />
+      <option name="externalSystemIdString" value="GRADLE" />
+      <option name="scriptParameters" value="runUiHeadlessSupportingMain" />
+      <option name="taskDescriptions">
+        <list />
+      </option>
+      <option name="taskNames">
+        <list />
+      </option>
+      <option name="vmOptions" />
+    </ExternalSystemSettings>
+    <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+    <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+    <DebugAllEnabled>false</DebugAllEnabled>
+    <method v="2" />
   </configuration>
 </component>
