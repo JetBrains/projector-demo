@@ -28,8 +28,11 @@ repositories {
   maven("https://jitpack.io")
 }
 
+val originalMain = "org.jetbrains.projector.demo.OriginalMain"
+val headlessSupportingMain = "org.jetbrains.projector.demo.HeadlessSupportingMain"
+
 application {
-  mainClass.set("org.jetbrains.projector.demo.OriginalMain")
+  mainClass.set(originalMain)
 }
 
 group = "org.jetbrains.projector"
@@ -68,7 +71,7 @@ fun Project.inline(conf: Configuration): Iterable<Any> {
 val jarOriginal by tasks.creating(Jar::class) {
   manifest {
     attributes(
-      "Main-Class" to "org.jetbrains.projector.demo.OriginalMain",
+      "Main-Class" to originalMain,
     )
   }
 
@@ -84,7 +87,7 @@ val jarOriginal by tasks.creating(Jar::class) {
 val jarHeadlessSupport by tasks.creating(Jar::class) {
   manifest {
     attributes(
-      "Main-Class" to "org.jetbrains.projector.demo.HeadlessSupportingMain",
+      "Main-Class" to headlessSupportingMain,
     )
   }
 
@@ -100,3 +103,28 @@ val jarHeadlessSupport by tasks.creating(Jar::class) {
 tasks.build {
   dependsOn(jarOriginal, jarHeadlessSupport)
 }
+
+fun createRunner(mainClassName: String, vararg jvmArgs: String) = tasks.creating(JavaExec::class) {
+  group = "application"
+  mainClass.set(mainClassName)
+  classpath(sourceSets["main"].runtimeClasspath)
+  jvmArgs(*jvmArgs)
+}
+
+val runUiOriginalMain by createRunner(
+  mainClassName = originalMain,
+)
+
+val runUiHeadlessSupportingMain by createRunner(
+  mainClassName = headlessSupportingMain,
+)
+
+val runHeadlessHeadlessSupportingMain by createRunner(
+  mainClassName = headlessSupportingMain,
+  "-Dorg.jetbrains.projector.server.enable=true",
+)
+
+val runHeadlessProjectorLauncher by createRunner(
+  mainClassName = "org.jetbrains.projector.server.ProjectorLauncher",
+  "-Dorg.jetbrains.projector.server.classToLaunch=$originalMain",
+)
