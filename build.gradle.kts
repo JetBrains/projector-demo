@@ -32,7 +32,7 @@ application {
   mainClass.set("org.jetbrains.projector.demo.OriginalMain")
 }
 
-group = "com.intellij"
+group = "org.jetbrains.projector"
 version = "1.0-SNAPSHOT"
 
 val jarOriginalConf: Configuration by configurations.creating
