@@ -23,9 +23,15 @@ plugins {
   application
 }
 
+val useJitpack: String by project
+
 repositories {
   mavenCentral()
-  maven("https://jitpack.io")
+  if (useJitpack.toBoolean()) {
+    maven("https://jitpack.io")
+  } else {
+    maven("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies")
+  }
 }
 
 val originalMain = "org.jetbrains.projector.demo.OriginalMain"
@@ -58,7 +64,11 @@ configurations.all {
 dependencies {
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
   implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-  implementation("com.github.JetBrains.projector-server:projector-server:$projectorServerVersion")
+  if (useJitpack.toBoolean()) {
+    implementation("com.github.JetBrains.projector-server:projector-server:-SNAPSHOT")
+  } else {
+    implementation("org.jetbrains.projector:projector-server:$projectorServerVersion")
+  }
 
   jarOriginalConf("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
   jarOriginalConf("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")

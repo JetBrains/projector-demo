@@ -19,5 +19,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '11'
-      - run: ./gradlew clean
-      - run: ./gradlew build
+      - run: ./gradlew clean build
+      - run: |
+          echo useJitpack=false >> gradle.properties
+          ./gradlew clean build
