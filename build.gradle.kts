@@ -17,21 +17,28 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
+import java.util.*
 
 plugins {
   kotlin("jvm")
   application
 }
 
-val useJitpack: String by project
+val localProperties = Properties().apply {
+  try {
+    load(File(rootDir, "local.properties").inputStream())
+  }
+  catch (t: Throwable) {
+    println("Can't read local.properties: $t, assuming empty")
+  }
+}
 
 repositories {
   mavenCentral()
-  if (useJitpack.toBoolean()) {
-    maven("https://jitpack.io")
-  } else {
+  if (localProperties["projectorServerSource"] == "space-VERSION") {
     maven("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies")
   }
+  else maven("https://jitpack.io")
 }
 
 val originalMain = "org.jetbrains.projector.demo.OriginalMain"
@@ -64,12 +71,10 @@ configurations.all {
 dependencies {
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
   implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-  if (useJitpack.toBoolean()) {
-    implementation("com.github.JetBrains.projector-server:projector-server:-SNAPSHOT")
-  } else {
+  if (localProperties["projectorServerSource"] == "space-VERSION") {
     implementation("org.jetbrains.projector:projector-server:$projectorServerVersion")
   }
-
+  else implementation("com.github.JetBrains.projector-server:projector-server:-SNAPSHOT")
   jarOriginalConf("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
   jarOriginalConf("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
 }

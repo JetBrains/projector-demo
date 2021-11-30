@@ -1,2 +1,4 @@
-# If you want to use local projector-server:projector-server module, define the following property:
-useLocalProjectorServer=true
+# If you want to use local projector-server:projector-server module. Change this property to "local"
+# If you want to use JitPack, JetBrains has self-hosted repo. Change this property to "jitpack-VERSION":
+# If you want to use Space, JetBrains has self-hosted repo. Change this property to "space-VERSION":
+projectorServerSource=local

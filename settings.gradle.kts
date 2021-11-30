@@ -35,10 +35,10 @@ val localProperties = java.util.Properties().apply {
   }
 }
 
-if (localProperties["useLocalProjectorServer"] == "true") {
+if (localProperties["projectorServerSource"] == "local") {
   includeBuild("../projector-server") {
     dependencySubstitution {
-      substitute(module("com.github.JetBrains.projector-server:projector-server")).with(project(":projector-server"))
+      substitute(module("com.github.JetBrains.projector-server:projector-server")).using(project(":projector-server"))
     }
   }
 }
