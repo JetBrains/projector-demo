@@ -20,6 +20,37 @@ jobs:
         with:
           java-version: '11'
       - run: ./gradlew clean build
+
+  build-server-local:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macOS-latest ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11'
       - run: |
-          echo useJitpack=false >> gradle.properties
+          cd ..
+          git clone https://github.com/JetBrains/projector-server.git
+          cd projector-demo
+          echo projectorServerSource=local > local.properties
+          ./gradlew clean build
+
+  build-server-self-hosted-repos:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macOS-latest ]
+        projectorServerSource: [ jitpack-VERSION, space-VERSION ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      - run: |
+          echo projectorServerSource=${{ matrix.projectorServerSource }} > local.properties
           ./gradlew clean build
