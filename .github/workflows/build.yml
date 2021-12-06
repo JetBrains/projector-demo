@@ -19,7 +19,8 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '11'
-      - run: ./gradlew clean build
+      - run: ./gradlew clean
+      - run: ./gradlew build
 
   build-server-local:
     runs-on: ${{matrix.os}}
@@ -37,7 +38,8 @@ jobs:
           git clone https://github.com/JetBrains/projector-server.git
           cd projector-demo
           echo projectorServerSource=local > local.properties
-          ./gradlew clean build
+      - run: ./gradlew clean
+      - run: ./gradlew build
 
   build-server-self-hosted-repos:
     runs-on: ${{matrix.os}}
@@ -53,4 +55,5 @@ jobs:
           java-version: '11'
       - run: |
           echo projectorServerSource=${{ matrix.projectorServerSource }} > local.properties
-          ./gradlew clean build
+      - run: ./gradlew clean
+      - run: ./gradlew build
