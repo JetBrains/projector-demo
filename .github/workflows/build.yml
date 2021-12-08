@@ -46,7 +46,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macOS-latest ]
-        projectorServerSource: [ jitpack-VERSION, space-VERSION ]
+        projectorServerSource: [ jitpack-cb4aea89, space-cb4aea89 ]
 
     steps:
       - uses: actions/checkout@v2

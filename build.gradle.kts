@@ -33,12 +33,17 @@ val localProperties = Properties().apply {
   }
 }
 
+val projectorServerSource: String = localProperties["projectorServerSource"].toString().substringBefore('-')
+val projectorServerVersion: String = localProperties["projectorServerSource"].toString().substringAfter('-')
+
 repositories {
   mavenCentral()
-  if (localProperties["projectorServerSource"] == "space-VERSION") {
+  if (projectorServerSource == "space") {
     maven("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies")
   }
-  else maven("https://jitpack.io")
+  else {
+    maven("https://jitpack.io")
+  }
 }
 
 val originalMain = "org.jetbrains.projector.demo.OriginalMain"
@@ -54,7 +59,6 @@ version = "1.0-SNAPSHOT"
 val jarOriginalConf: Configuration by configurations.creating
 
 val kotlinVersion: String by project
-val projectorServerVersion: String by project
 val targetJvm: String by project
 
 tasks.withType<KotlinJvmCompile> {
@@ -71,10 +75,17 @@ configurations.all {
 dependencies {
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
   implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-  if (localProperties["projectorServerSource"] == "space-VERSION") {
-    implementation("org.jetbrains.projector:projector-server:$projectorServerVersion")
+  when (projectorServerSource) {
+    "space" -> {
+      implementation("org.jetbrains.projector:projector-server:$projectorServerVersion")
+    }
+    "jitpack" -> {
+      implementation("com.github.JetBrains.projector-server:projector-server:$projectorServerVersion")
+    }
+    else -> {
+      implementation("com.github.JetBrains.projector-server:projector-server:-SNAPSHOT")
+    }
   }
-  else implementation("com.github.JetBrains.projector-server:projector-server:-SNAPSHOT")
   jarOriginalConf("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
   jarOriginalConf("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
 }
