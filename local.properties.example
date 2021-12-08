@@ -1,4 +1,6 @@
 # If you want to use local projector-server:projector-server module. Change this property to "local"
-# If you want to use JitPack, JetBrains has self-hosted repo. Change this property to "jitpack-VERSION":
-# If you want to use Space, JetBrains has self-hosted repo. Change this property to "space-VERSION":
+# If you want to use JitPack, JetBrains has self-hosted repo. Change this property to "jitpack-<VERSION>".
+# Example: projectorServerSource=jitpack-cb4aea89
+# If you want to use Space, JetBrains has self-hosted repo. Change this property to "space-<VERSION>".
+# Example: projectorServerSource=space-cb4aea89
 projectorServerSource=local
