@@ -82,6 +82,9 @@ dependencies {
     "jitpack" -> {
       implementation("com.github.JetBrains.projector-server:projector-server:$projectorServerVersion")
     }
+    "" -> {
+      throw Exception("projectorServerSource is empty")
+    }
     else -> {
       implementation("com.github.JetBrains.projector-server:projector-server:-SNAPSHOT")
     }
