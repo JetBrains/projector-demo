@@ -33,8 +33,8 @@ val localProperties = Properties().apply {
   }
 }
 
-val projectorServerSource: String = localProperties["projectorServerSource"].toString().substringBefore('-')
-val projectorServerVersion: String = localProperties["projectorServerSource"].toString().substringAfter('-')
+val projectorServerSource = (localProperties["projectorServerSource"] as String?)?.substringBefore('-')
+val projectorServerVersion = (localProperties["projectorServerSource"] as String?)?.substringAfter('-')
 
 repositories {
   mavenCentral()
@@ -82,11 +82,11 @@ dependencies {
     "jitpack" -> {
       implementation("com.github.JetBrains.projector-server:projector-server:$projectorServerVersion")
     }
-    "" -> {
-      throw Exception("projectorServerSource is empty")
+    "local", null -> {
+      implementation("com.github.JetBrains.projector-server:projector-server:-SNAPSHOT")
     }
     else -> {
-      implementation("com.github.JetBrains.projector-server:projector-server:-SNAPSHOT")
+      throw IllegalStateException("Unknown projectorServerSource = '$projectorServerSource'")
     }
   }
   jarOriginalConf("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
