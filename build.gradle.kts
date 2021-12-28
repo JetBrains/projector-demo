@@ -151,9 +151,11 @@ val runUiHeadlessSupportingMain by createRunner(
 val runHeadlessHeadlessSupportingMain by createRunner(
   mainClassName = headlessSupportingMain,
   "-Dorg.jetbrains.projector.server.enable=true",
+  "-Djdk.attach.allowAttachSelf=true",
 )
 
 val runHeadlessProjectorLauncher by createRunner(
   mainClassName = "org.jetbrains.projector.server.ProjectorLauncher",
   "-Dorg.jetbrains.projector.server.classToLaunch=$originalMain",
+  "-Djdk.attach.allowAttachSelf=true",
 )
